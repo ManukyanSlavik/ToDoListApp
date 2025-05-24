@@ -3,15 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="Script.js"></script>
+    <link rel="stylesheet" href="Style.css">
+
     <title>Home page</title>
 </head>
 <body>
-    <!--
-    TODO: We need a way of creating and storing tasks: An object constructor and an array.
-          Read input from index and create tasks with the given values.
-          Loop the array and output the tasks. Show "No tasks for now".
-          Make that shit look pretty and responsive.
-          Figure all this out.
-    -->
+    <div class="main">
+        <div class="container">
+            <div class="container-header">
+                <h3 id="date"></h3>
+            </div>
+            <div class="container-body">
+                <div class="row">
+                    <input type="input" id="taskName" placeholder="Enter your task here">
+                    <button class="round-button">+</button>
+                </div>
+                <div>
+                    <div class="toDos">
+                        <div class="toDos-header">
+                            <h3>Upcoming</h3>
+                        </div>
+                        <div class="toDos-body">
+                            <ul id="taskList">
+                                <!-- <li class="checked">Task 1</li>
+                                <li>Task 2</li>
+                                <li>Task 3</li> -->
+                            </ul>
+                        </div>
+                    </div>
+        
+                    <div class="completedTasks">
+        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
 </body>
 </html>
