@@ -1,0 +1,27 @@
+:root{
+    --background-color-first: #464555;
+    --background-color-second: #626269;
+    --text-color: #ccc;
+
+    --card-header-color: #42455d;
+    --card-body-color: #1a1c35;
+
+    --input-placeholder-color: #a8a8a8;
+    --input-background-color: #363952;
+
+    color-scheme: dark;
+}
+
+[data-theme="light"]{
+    --background-color-first: #153677;
+    --background-color-second: #6a0c81;
+    --text-color: #fff;
+
+    --card-header-color: #42455d;
+    --card-body-color: #1a1c35;
+
+    --input-placeholder-color: #a8a8a8;
+    --input-background-color: #363952;
+
+    color-scheme: light;
+}

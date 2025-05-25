@@ -6,6 +6,7 @@
     
     <script src="Script.js"></script>
     <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="Themes.css">
 
     <title>Home page</title>
 </head>
@@ -18,14 +19,14 @@
             <div class="container-body">
                 <div class="row">
                     <input type="input" id="taskName" placeholder="Enter your task here">
-                    <button class="round-button">+</button>
+                    <button class="round-button" onclick="addTask()">+</button>
                 </div>
                 <div>
-                    <div class="toDos">
-                        <div class="toDos-header">
+                    <div class="card">
+                        <div class="card-header">
                             <h3>Upcoming</h3>
                         </div>
-                        <div class="toDos-body">
+                        <div class="card-body">
                             <ul id="taskList">
                                 <!-- <li class="checked">Task 1</li>
                                 <li>Task 2</li>
@@ -34,8 +35,15 @@
                         </div>
                     </div>
         
-                    <div class="completedTasks">
-        
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Completed</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul id="finishedTaskList">
+                                
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

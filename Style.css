@@ -8,7 +8,7 @@
 .main{
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(135deg, #464555, #aaa9bc);
+    background: linear-gradient(135deg, var(--background-color-first), var(--background-color-second));
     padding: 10px;
 }
 
@@ -22,19 +22,20 @@
 .container-header{
     width: 100%;
     height: 50px;
-    background: #42455d;
+    background: var(--card-header-color);
     border-radius: 10px 10px 0 0;
     text-align: center;
     padding-top: 15px;
 }
 .container-body{
     width: 100%;
-    background: #1a1c35;
+    background: var(--card-body-color);
     padding: 40px 30px 70px;
     border-radius: 0 0 10px 10px;
+    box-shadow: 0px 13px 23px -7px #000000;
 }
 .container h3{
-    color: #ccc;
+    color: var(--text-color);
     text-shadow: 0 0 5px #5d5d5d;
 }
 
@@ -42,7 +43,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #363952;
+    background: var(--input-background-color);
     border-radius: 30px;
     padding-left: 20px;
     margin-bottom: 30px;
@@ -55,7 +56,7 @@ input{
     color: #ccc;
 }
 input::placeholder{
-    color: #a8a8a8;
+    color: var(--input-placeholder-color);
 }
 
 .round-button{
@@ -74,28 +75,29 @@ input::placeholder{
     cursor: pointer;
 }
 
-.toDos{
+.card{
     width: 100%;
     max-width: 650px;
     margin: 0 auto 20px;
     display: flex;
     flex-direction: column;
+    margin-bottom: 40px;
 }
-.toDos-header{
+.card-header{
     width: 100%;
-    background: #42455d;
+    background: var(--card-header-color);
     border-radius: 10px 10px 0 0;
     text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.toDos-header h3{
-    color: #ccc;
+.card-header h3{
+    color: var(--text-color);
     text-shadow: 0 0 5px #5d5d5d;
 }
-.toDos-body{
+.card-body{
     width: 100%;
-    background: #27294e;
+    background: var(--card-body-color);
 }
 
 ul li{
@@ -103,8 +105,8 @@ ul li{
     user-select: none;
     cursor: pointer;
     font-size: 17px;
-    padding: 12px 8px 12px 50px;
-    color: #ccc;
+    padding: 15px 8px 12px 75px;
+    color: var(--text-color);
     position: relative;
 }
 ul li::before{
@@ -116,8 +118,8 @@ ul li::before{
     background-image: url(images/unchecked.png);
     background-size: cover;
     background-position: center;
-    top: 6px;
-    left: 8px;
+    top: 9px;
+    left: 33px;
 }
 
 ul li.checked{
@@ -126,4 +128,22 @@ ul li.checked{
 }
 ul li.checked::before{
     background-image: url(images/checked.png);
+}
+ul li span{
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 22px;
+    line-height: 30px;
+    text-align: center;
+    color: #ff5945;
+    transition: .6s;
+}
+ul li span:hover{
+    background: #ff5945;
+    color: #ccc;
+    transform: rotate(90deg);
 }
