@@ -6,6 +6,7 @@ let topElemSecond; // Finished tasks' top element
 let date;
 let id = 0;
 
+
 window.onload = function(){
     input = document.getElementById("taskName");
     list = document.getElementById("taskList");
@@ -13,11 +14,11 @@ window.onload = function(){
     topElemFirst = document.getElementById("topElemFirst");
     topElemSecond = document.getElementById("topElemSecond");
     
-
     date = new Date();
     const currDate = "Today is " + date.toLocaleDateString();
     document.getElementById("date").textContent = currDate;
-    // loadData();
+
+    loadData();
 };
 
 function addTask(){
@@ -35,7 +36,7 @@ function addTask(){
         li.setAttribute("id", id);
         id++;
 
-        list.insertBefore(li, topElemFirst);
+        list.prepend(li);
     }
 
     input.value = '';
@@ -63,7 +64,6 @@ function toggleTheme() {
     document.documentElement.setAttribute('data-theme', newTheme);
 }
 
-
 function saveData(){
     localStorage.setItem("toDos", list.innerHTML);
     localStorage.setItem("finished", finishedTaskList.innerHTML);
@@ -83,18 +83,17 @@ function dropHandler(e){
     e.preventDefault(); 
     const elemId = e.dataTransfer.getData("id");
     const elem = document.getElementById(elemId);
-
+    
     if(e.target.id === "topElemFirst"){
         if(elem.classList.contains("checked"))
             elem.classList.remove("checked");
-
+        
         list.insertBefore(elem, e.target);
     }
     else if(e.target.id === "topElemSecond"){
         if(!elem.classList.contains("checked"))
             elem.classList.add("checked");
-
+        
         finishedTaskList.insertBefore(elem, e.target);
     }
-        
 }
