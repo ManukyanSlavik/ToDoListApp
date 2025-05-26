@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <script src="Script.js"></script>
-    <!-- <script src="DragAndDropHanler.js"></script> -->
+    <!-- <script src="DragAndDropHandler.js"></script> -->
 
     <link rel="stylesheet" href="Style.css">
     <link rel="stylesheet" href="Themes.css">
@@ -30,7 +30,7 @@
                         </div>
                         <div class="card-body">
                             <ul id="taskList">
-                                <li class="bottomElem" id="topElemFirst" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">insert here</li>
+                                <li class="bottomElem" id="bottomElemFirst" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">Drag and drop a task here to mark it as unfinished.</li>
                             </ul>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                         </div>
                         <div class="card-body">
                             <ul id="finishedTaskList">
-                                <li class="bottomElem" id="topElemSecond" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">insert here</li>
+                                <li class="bottomElem" id="bottomElemSecond" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">Drag and drop a task here to mark it as finished.</li>
                             </ul>
                         </div>
                     </div>

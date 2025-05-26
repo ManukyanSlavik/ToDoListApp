@@ -1,45 +1,44 @@
-let input;
-let list;
-let finishedTaskList;
-let topElemFirst; // ToDo's top element
-let topElemSecond; // Finished tasks' top element
-let date;
 let id = 0;
 
+const app = {};
 
-window.onload = function(){
-    input = document.getElementById("taskName");
-    list = document.getElementById("taskList");
-    finishedTaskList = document.getElementById("finishedTaskList");
-    topElemFirst = document.getElementById("topElemFirst");
-    topElemSecond = document.getElementById("topElemSecond");
-    
+document.addEventListener("DOMContentLoaded", function(){
+    app.input = document.getElementById("taskName");
+    app.list = document.getElementById("taskList");
+    app.finishedTaskList = document.getElementById("finishedTaskList");
+    app.topElemFirst = document.getElementById("bottomElemFirst");
+    app.topElemSecond = document.getElementById("bottomElemSecond");
+
+    // app.list.prepend(localStorage.getItem("topElem"));
+
     date = new Date();
     const currDate = "Today is " + date.toLocaleDateString();
     document.getElementById("date").textContent = currDate;
 
     loadData();
-};
+});
+
+
 
 function addTask(){
-    if(input.value === '')
+    if(app.input.value === '')
         alert("Input cannot be empty!");
     else{
         let li = document.createElement("li");
         let span = document.createElement("span");
 
-        li.innerHTML = input.value;
+        li.innerHTML = app.input.value;
         span.innerHTML = "\u00d7";
         li.appendChild(span);
         li.setAttribute("draggable", true);
-        li.setAttribute("ondragstart", "onDragStart(event)")
+        li.setAttribute("ondragstart", "onDragStart(event)");
         li.setAttribute("id", id);
         id++;
 
-        list.prepend(li);
+        app.list.prepend(li);
     }
 
-    input.value = '';
+    app.input.value = '';
     saveData();
 }
 
@@ -48,14 +47,16 @@ document.addEventListener("click", function(e){
         e.target.classList.toggle("checked");
 
         if(e.target.parentElement.id == "taskList")
-            finishedTaskList.insertBefore(e.target, topElemSecond);
+            app.finishedTaskList.prepend(e.target);
         else if(e.target.parentElement.id == "finishedTaskList")
-            list.insertBefore(e.target, topElemFirst);
+            app.list.prepend(e.target);
+        
+        saveData();
     }
-    else if(e.target.tagName === "SPAN")
+    else if(e.target.tagName === "SPAN"){
         e.target.parentElement.remove();
-
-    saveData();
+        saveData();
+    }
 });
 
 function toggleTheme() {
@@ -65,12 +66,61 @@ function toggleTheme() {
 }
 
 function saveData(){
-    localStorage.setItem("toDos", list.innerHTML);
-    localStorage.setItem("finished", finishedTaskList.innerHTML);
+    let data = [...app.list.children]
+                .filter(el => el.tagName === "LI" && el.getAttribute("class") !== "bottomElem")
+                .map(li => {
+                    let tmp = li.textContent.slice(0, -1).trim();
+                    return tmp; 
+                });
+
+    localStorage.setItem("toDos", data);
+
+    data = [...app.finishedTaskList.children]
+            .filter(el => el.tagName === "LI" && el.getAttribute("class") !== "bottomElem")
+            .map(li => {
+                let tmp = li.textContent.slice(0, -1).trim();
+                return tmp; 
+            });
+
+    localStorage.setItem("finished", data);
 }
 function loadData(){
-    list.innerHTML = localStorage.getItem("toDos");
-    finishedTaskList.innerHTML = localStorage.getItem("finished");
+    //TODO: Extract this shit into a separate function it looks horrendous.
+    let data = localStorage.getItem("toDos").split(',');
+
+
+    for (let i = 0; i < data.length; i++){
+        let li = document.createElement("li");
+        let span = document.createElement("span");
+
+        li.innerHTML = data[i];
+        span.innerHTML = "\u00d7";
+        li.appendChild(span);
+        li.setAttribute("draggable", true);
+        li.setAttribute("ondragstart", "onDragStart(event)");
+        li.setAttribute("id", id);
+        id++;
+
+        app.list.prepend(li);
+    }
+
+    data = localStorage.getItem("finished");
+    console.log(data);
+
+    for (let i = 0; i < data.length; i++){
+        let li = document.createElement("li");
+        let span = document.createElement("span");
+
+        li.innerHTML = data[i];
+        span.innerHTML = "\u00d7";
+        li.appendChild(span);
+        li.setAttribute("draggable", true);
+        li.setAttribute("ondragstart", "onDragStart(event)");
+        li.setAttribute("id", id);
+        id++;
+
+        app.finishedTaskList.prepend(li);
+    }
 }
 
 function onDragStart(e){
@@ -83,17 +133,17 @@ function dropHandler(e){
     e.preventDefault(); 
     const elemId = e.dataTransfer.getData("id");
     const elem = document.getElementById(elemId);
-    
-    if(e.target.id === "topElemFirst"){
+    console.log("The id is: " + elemId);
+    if(e.target.id === "bottomElemFirst"){
         if(elem.classList.contains("checked"))
             elem.classList.remove("checked");
         
-        list.insertBefore(elem, e.target);
+        app.list.insertBefore(elem, e.target);
     }
-    else if(e.target.id === "topElemSecond"){
+    else if(e.target.id === "bottomElemSecond"){
         if(!elem.classList.contains("checked"))
             elem.classList.add("checked");
         
-        finishedTaskList.insertBefore(elem, e.target);
+        app.finishedTaskList.insertBefore(elem, e.target);
     }
 }
