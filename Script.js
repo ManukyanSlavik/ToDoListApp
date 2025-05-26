@@ -1,6 +1,8 @@
 let input;
 let list;
 let finishedTaskList;
+let topElemFirst; // ToDo's top element
+let topElemSecond; // Finished tasks' top element
 let date;
 let id = 0;
 
@@ -8,11 +10,14 @@ window.onload = function(){
     input = document.getElementById("taskName");
     list = document.getElementById("taskList");
     finishedTaskList = document.getElementById("finishedTaskList");
+    topElemFirst = document.getElementById("topElemFirst");
+    topElemSecond = document.getElementById("topElemSecond");
+    
 
     date = new Date();
     const currDate = "Today is " + date.toLocaleDateString();
     document.getElementById("date").textContent = currDate;
-    loadData();
+    // loadData();
 };
 
 function addTask(){
@@ -30,17 +35,11 @@ function addTask(){
         li.setAttribute("id", id);
         id++;
 
-        list.appendChild(li);
+        list.insertBefore(li, topElemFirst);
     }
 
     input.value = '';
     saveData();
-}
-
-function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', newTheme);
 }
 
 document.addEventListener("click", function(e){
@@ -48,15 +47,22 @@ document.addEventListener("click", function(e){
         e.target.classList.toggle("checked");
 
         if(e.target.parentElement.id == "taskList")
-            finishedTaskList.appendChild(e.target);
+            finishedTaskList.insertBefore(e.target, topElemSecond);
         else if(e.target.parentElement.id == "finishedTaskList")
-            list.appendChild(e.target);
+            list.insertBefore(e.target, topElemFirst);
     }
     else if(e.target.tagName === "SPAN")
         e.target.parentElement.remove();
 
     saveData();
 });
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+}
+
 
 function saveData(){
     localStorage.setItem("toDos", list.innerHTML);
@@ -75,15 +81,20 @@ function dragOverHandler(e){
 }
 function dropHandler(e){
     e.preventDefault(); 
-    // e.target.getElementsByTagName('ul')[0].appendChild(document.getElementById(e.dataTransfer.getData("id")));
     const elemId = e.dataTransfer.getData("id");
     const elem = document.getElementById(elemId);
 
-    elem.classList.toggle("checked");
-    console.log(e.target);
+    if(e.target.id === "topElemFirst"){
+        if(elem.classList.contains("checked"))
+            elem.classList.remove("checked");
 
-    if(elem.classList.contains("checked"))
-        finishedTaskList.appendChild(elem);
-    else
-        list.appendChild(elem);
+        list.insertBefore(elem, e.target);
+    }
+    else if(e.target.id === "topElemSecond"){
+        if(!elem.classList.contains("checked"))
+            elem.classList.add("checked");
+
+        finishedTaskList.insertBefore(elem, e.target);
+    }
+        
 }
