@@ -22,7 +22,7 @@
                     <button class="round-button" onclick="addTask()">+</button>
                 </div>
                 <div>
-                    <div class="card">
+                    <div class="card" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
                         <div class="card-header">
                             <h3>Upcoming</h3>
                         </div>
@@ -31,11 +31,12 @@
                                 <!-- <li class="checked">Task 1</li>
                                 <li>Task 2</li>
                                 <li>Task 3</li> -->
+                                <li class="bottomElem"></li>
                             </ul>
                         </div>
                     </div>
         
-                    <div class="card">
+                    <div class="card" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
                         <div class="card-header">
                             <h3>Completed</h3>
                         </div>
