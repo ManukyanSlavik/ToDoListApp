@@ -8,17 +8,19 @@ function dropHandler(e){
     e.preventDefault(); 
     const elemId = e.dataTransfer.getData("id");
     const elem = document.getElementById(elemId);
-    
-    if(e.target.id === "topElemFirst"){
+
+    if(e.target.id === "bottomElemFirst"){
         if(elem.classList.contains("checked"))
             elem.classList.remove("checked");
         
-        list.insertBefore(elem, e.target);
+        app.list.insertBefore(elem, e.target);
     }
-    else if(e.target.id === "topElemSecond"){
+    else if(e.target.id === "bottomElemSecond"){
         if(!elem.classList.contains("checked"))
             elem.classList.add("checked");
         
-        finishedTaskList.insertBefore(elem, e.target);
+        app.finishedTaskList.insertBefore(elem, e.target);
     }
+
+    saveData();
 }

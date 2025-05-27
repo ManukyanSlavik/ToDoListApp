@@ -100,7 +100,7 @@ input::placeholder{
     background: var(--card-body-color);
 }
 
-ul li{
+ul li.task {
     list-style: none;
     user-select: none;
     cursor: pointer;
@@ -109,7 +109,7 @@ ul li{
     color: var(--text-color);
     position: relative;
 }
-ul li::before{
+ul li.task::before{
     content: '';
     position: absolute;
     height: 28px;
@@ -121,6 +121,8 @@ ul li::before{
     top: 9px;
     left: 33px;
 }
+
+
 
 ul li.checked{
     color: #929292;
