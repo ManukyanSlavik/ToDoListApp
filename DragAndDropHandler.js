@@ -1,5 +1,7 @@
 function onDragStart(e){
     e.dataTransfer.setData("id", e.target.id);
+    app.bottomElemFirst.classList.toggle("bottomElemHighlight");
+    app.bottomElemSecond.classList.toggle("bottomElemHighlight");
 }
 function dragOverHandler(e){
     e.preventDefault();
@@ -23,4 +25,7 @@ function dropHandler(e){
     }
 
     saveData();
+
+    app.bottomElemFirst.classList.toggle("bottomElemHighlight");
+    app.bottomElemSecond.classList.toggle("bottomElemHighlight");
 }

@@ -1,6 +1,6 @@
 function saveData(){
     let data = [...app.list.children]
-                .filter(el => el.tagName === "LI" && el.getAttribute("class") !== "bottomElem")
+                .filter(el => el.tagName === "LI" && !el.classList.contains("bottomElem"))
                 .map(li => {
                     return li.textContent.slice(0, -1).trim(); // slice() is to remove the <span> at the end.
                 });
@@ -8,7 +8,7 @@ function saveData(){
     localStorage.setItem("toDos", data);
 
     data = [...app.finishedTaskList.children]
-            .filter(el => el.tagName === "LI" && el.getAttribute("class") !== "bottomElem")
+            .filter(el => el.tagName === "LI" && !el.classList.contains("bottomElem"))
             .map(li => {
                 return li.textContent.slice(0, -1).trim(); // slice() is to remove the <span> at the end.
             });

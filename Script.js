@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", function(){
     app.input = document.getElementById("taskName");
     app.list = document.getElementById("taskList");
     app.finishedTaskList = document.getElementById("finishedTaskList");
-    app.topElemFirst = document.getElementById("bottomElemFirst");
-    app.topElemSecond = document.getElementById("bottomElemSecond");
+    app.bottomElemFirst = document.getElementById("bottomElemFirst");
+    app.bottomElemSecond = document.getElementById("bottomElemSecond");
 
 
     date = new Date();
@@ -47,6 +47,7 @@ document.addEventListener("click", function(e){
         saveData();
     }
 });
+
 
 function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute('data-theme');

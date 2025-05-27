@@ -122,7 +122,20 @@ ul li.task::before{
     left: 33px;
 }
 
-
+.bottomElem{
+    list-style: none;
+    user-select: none;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: var(--card-header-color);
+    border-radius: 0 0 10px 10px;
+    transition: .5s;
+}
+.bottomElemHighlight{
+    background: #ccc;
+    color: #1a1c35;
+}
 
 ul li.checked{
     color: #929292;
@@ -148,4 +161,27 @@ ul li span:hover{
     background: #ff5945;
     color: #ccc;
     transform: rotate(90deg);
+}
+
+.themeButton{
+    width: 75px;
+    height: 75px;
+    font-size: 30px;
+    position: fixed;
+    cursor: pointer;
+    bottom: 20px;
+    right: 20px;
+
+    color: #ccc;
+    border-radius: 50%;
+    background: #1a1c35;
+
+    display: inline-block;
+    align-content: center;
+    text-align: center;
+    transition: .5s;
+}
+.themeButton:hover{
+    background: #ccc;
+    color: #1a1c35;
 }
